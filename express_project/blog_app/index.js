@@ -4,6 +4,8 @@ const dbconnection = require('./config/database');
 const express = require('express');
 
 const blog = require('./route/routes');
+// Import auth routes
+const authRoutes = require('./route/authRoutes');
 
 const app = express();
 
@@ -11,16 +13,12 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
 
-
-
- app.use('/api/v2',blog);
+// Use routes
+app.use('/api/v2', blog);
+// Add auth routes
+app.use('/api/v2/auth', authRoutes);
 
 app.listen(PORT, () => {
     console.log(`server started at ${PORT}`);
-
 });
 dbconnection();
-
-
-
-
